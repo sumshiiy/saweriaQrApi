@@ -3,6 +3,9 @@
 This library provides a simple interface to interact with the Saweria API.
 and create qris payment using only username 🚀
 
+## Before Using
+<b>USE AT OWN RISK, ANY SUSPENDED SAWERIA ACCOUNT, WE WILL NOT BE RESPONSIBLE AT ALL BECAUSE THE SAWERIA API HIT VIOLATES TERMS</b>
+
 ## Installation
 
 ```bash
