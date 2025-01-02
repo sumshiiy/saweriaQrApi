@@ -54,7 +54,7 @@ The result is
 const {  createPaymentString, createPaymentQr } = require('saweria-createqr');
 
 // example
-createPaymentQr(saweria_username,path, { amount: amount}) .then(result => {
+createPaymentQr(saweria_username, { amount: amount}) .then(result => {
         console.log(result);
     })
     .catch(error => {
