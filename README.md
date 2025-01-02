@@ -16,7 +16,7 @@ npm install saweria-createqr
 const {  createPaymentString, createPaymentQr } = require('saweria-createqr');
 
 // example
-createPaymentString(saweria_username, { amount: amount, message: message}) .then(result => {
+createPaymentString(saweria_username, { amount: amount}) .then(result => {
         console.log(result);
     })
     .catch(error => {
@@ -25,7 +25,7 @@ createPaymentString(saweria_username, { amount: amount, message: message}) .then
 
 
     // guide
-createPaymentString("aisbirpedia", { amount: 1000, message: "message"}) .then(result => {
+createPaymentString("aisbirpedia", { amount: 1000}) .then(result => {
         console.log(result);
     })
     .catch(error => {
@@ -54,7 +54,7 @@ The result is
 const {  createPaymentString, createPaymentQr } = require('saweria-createqr');
 
 // example
-createPaymentQr(saweria_username,path, { amount: amount, message: message}) .then(result => {
+createPaymentQr(saweria_username,path, { amount: amount}) .then(result => {
         console.log(result);
     })
     .catch(error => {
@@ -63,7 +63,7 @@ createPaymentQr(saweria_username,path, { amount: amount, message: message}) .the
 
 
     // guide
-createPaymentQr("aisbirpedia", { amount: 1000, message: "message"}) .then(result => {
+createPaymentQr("aisbirpedia", { amount: 1000}) .then(result => {
         console.log(result);
     })
     .catch(error => {
