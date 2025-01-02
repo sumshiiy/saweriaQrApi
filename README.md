@@ -6,14 +6,14 @@ and create qris payment using only username 🚀
 ## Installation
 
 ```bash
-npm install @sumshiiy/saweria-createqr
+npm install saweria-createqr
 ```
 
 ## Usage
 
 ### create Payment string method
 ```javascript
-const {  createPaymentString, createPaymentQr } = require('@sumshiiy/saweria-createqr');
+const {  createPaymentString, createPaymentQr } = require('saweria-createqr');
 
 // example
 createPaymentString(saweria_username, { amount: amount, message: message}) .then(result => {
@@ -51,7 +51,7 @@ The result is
 
 ### create Payment qr method
 ```javascript
-const {  createPaymentString, createPaymentQr } = require('@sumshiiy/saweria-createqr');
+const {  createPaymentString, createPaymentQr } = require('saweria-createqr');
 
 // example
 createPaymentQr(saweria_username,path, { amount: amount, message: message}) .then(result => {
