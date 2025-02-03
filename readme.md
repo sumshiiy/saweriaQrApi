@@ -1,98 +1,157 @@
-# Saweria API
+![Sawer](https://cdn.aisbir.cloud/saweriaa.png)
+# Saweria Qr Payment api
+and saweria.co unofficial api that can create qris on own account and check status of payment
+created by sumshiiy developer team
 
-This library provides a simple interface to interact with the Saweria API.
-and create qris payment using only username 🚀
+> [Original Npmjs](https://www.npmjs.com/package/saweria-createqr)
 
-## Installation
+## Featured
+| todos | status |
+|--|--|
+| Checking Auto payment | ✅ |
+| Checking User balance account | ✅ |
+| Set Expiry duration of payment | ✅ |
+| Catbox.moe as storage | ✅ |
+| Ai message auto generated | ✅ |
+| esm support | ⛔ |
 
-```bash
-npm install saweria-createqr
+## Api Tutorial
+
+ ### **Creating Payment basic**
+ ```js
+const { SumshiiySawer } = require('saweria-createqr');
+const sawer = new SumshiiySawer({ username: 'your saweria username', email: 'your saweria email', password: 'your saweria password'});
+
+(async () => {
+await sawer.login() // Login to your saweria account first
+
+ await sawer.createPaymentQr(amount, duration) // the duration in minute
+
+//example
+const payment = await sawer.createPaymentQr(1000,30) // expired in 30 minute
+console.log(payment)
+})
 ```
 
-## Usage
-
-### create Payment string method
-```javascript
-const {  createPaymentString, createPaymentQr } = require('@sumshiiy/saweria-createqr');
-
-// example
-createPaymentString(saweria_username, { amount: amount, message: message}) .then(result => {
-        console.log(result);
-    })
-    .catch(error => {
-        console.error(error);
-    });
-
-
-    // guide
-createPaymentString("aisbirpedia", { amount: 1000, message: "message"}) .then(result => {
-        console.log(result);
-    })
-    .catch(error => {
-        console.error(error);
-    });
-```
-
-The result is
+> Response Status example
 ```json
 {
-  created_by: 'Sumshiiy Developer Team',
-  trx_id: '9e40d10b-cd05-4dda-b66d-66c07cd6d7b5',
-  message: 'message',
+  author: '@aisbirkoenz',
+  trx_id: '21a8c370-5062-49af-b8dc-2a2d3cf3396c',
+  status: 'Pending',
+  status_simbolic: '⏳ Pending',
+  message: 'Semangat terus broo! Kamu bisa!',
   amount: 1000,
-  qr_string: '00020101021226570011ID.DANA.WWW011893600915016937059202091693705920303UME51440014ID.CO.QRIS.WWW0215ID20210917307330303UME520473925303360540410085802ID5907saweria6015Kota Jakarta Pu61051034062720115XxuNZHGj9C8i6zZ60490011ID.DANA.WWW0425MER20210714007745096086410501163046696',
-  created_at: 'Thu, 02 Jan 2025 03:38:25 GMT',
-  total_dibayar: 1008,
-  saweria_username: 'aisbirpedia',
-  saweria_apikey: 'f870a41e-997f-4523-a6c1-a1cdfdf10eab'
-}
-```
-
-
-### create Payment qr method
-```javascript
-const {  createPaymentString, createPaymentQr } = require('saweria-createqr');
-
-// example
-createPaymentQr(saweria_username,path, { amount: amount, message: message}) .then(result => {
-        console.log(result);
-    })
-    .catch(error => {
-        console.error(error);
-    });
-
-
-    // guide
-createPaymentQr("aisbirpedia", { amount: 1000, message: "message"}) .then(result => {
-        console.log(result);
-    })
-    .catch(error => {
-        console.error(error);
-    });
-```
-
-The result is
-```json
-{
-  author: '@sumshiiy',
-  trx_id: 'b3e77c50-1cb3-411a-ad97-87b1c98f6f09',
-  message: 'message',
-  amount: 1000,
-  qr_string: '00020101021226570011ID.DANA.WWW011893600915016937059202091693705920303UME51440014ID.CO.QRIS.WWW0215ID20210917307330303UME520473925303360540410085802ID5907saweria6015Kota Jakarta Pu61051034062720115cwKvEUVJQdw5qxR60490011ID.DANA.WWW0425MER2021071400774509608641050116304E3F9',
-  created_at: 'Thu, 02 Jan 2025 03:49:55 GMT',
+  qr_string: '00020101021226570011ID.DANA.WWW011893600915016937059202091693705920303UME51440014ID.CO.QRIS.WWW0215ID20210917307330303UME520473925303360540410085802ID5907saweria6015Kota Jakarta Pu61051034062720115ree9HxQL8uRztkJ60490011ID.DANA.WWW0425MER20210714007745096086410501163048419',
+  created_at: 'Mon, 03 Feb 2025 16:36:07 GMT',
+  invoice_url: 'https://saweria.co/qris/21a8c370-5062-49af-b8dc-2a2d3cf3396c',
   total_dibayar: 1008,
   saweria_username: 'aisbirpedia',
   saweria_apikey: 'f870a41e-997f-4523-a6c1-a1cdfdf10eab',
-  qr_image: "https://files.catbox.moe"
+  qr_image: 'https://files.catbox.moe/a9p9cg.jpg',
+  expired_in: 2025-02-03T16:37:08.356Z
 }
 ```
 
+### Cek Payment Status
+ ```js
+const { SumshiiySawer } = require('saweria-createqr');
+const sawer = new SumshiiySawer({ username: 'your saweria username', email: 'your saweria email', password: 'your saweria password'});
 
-## Methods
+(async () => {
+await sawer.login() // Login to your saweria account first
 
-### createPaymentQr()
-### createPaymentString()
+ await sawer.cekpayment(trxid) // trx id received after createpayment
 
-## License
+//example
+const payment = await sawer.createPaymentQr(1000,30) // expired in 30 minute
 
-This project is licensed under the MIT License.
+const tes = setInterval(async() => {
+   
+ const paymentStatus = await sawer.cekpayment(p.trx_id)
+ console.log(paymentStatus)
+
+ if (paymentStatus.status === "Paid") {
+    console.log('Payment Berhasil, Menghentikan interval')
+     clearInterval(tes)
+ }
+}, 7000);
+})
+```
+> example if pending
+```json
+{
+  author: '@aisbirkoenz',
+  code: 200,
+  trx_id: '0f141a97-80a0-48c7-89ea-8f4d9e277abf',
+  username: 'aisbirpedia',
+  status: 'Pending',
+  status_simbolic: '⏳ Pending',
+  amount: 1000,
+  invoice_url: 'https://saweria.co/qris/0f141a97-80a0-48c7-89ea-8f4d9e277abf',
+  total_dibayar: 1008,
+  created_at: 'Mon, 03 Feb 2025 16:37:02 GMT',
+  expired_in: '2025-02-03T16:38:02.602Z'
+}
+```
+>  example if paid
+```json
+{
+  author: '@aisbirkoenz',
+  code: 200,
+  trx_id: '0f141a97-80a0-48c7-89ea-8f4d9e277abf',
+  username: 'aisbirpedia',
+  status: 'Paid',
+  status_simbolic: '✅ Paid',
+  amount: 1000,
+  invoice_url: 'https://saweria.co/qris/0f141a97-80a0-48c7-89ea-8f4d9e277abf',
+  total_dibayar: 1008,
+  created_at: 'Mon, 03 Feb 2025 16:37:02 GMT',
+  expired_in: '2025-02-03T16:38:02.602Z'
+}
+```
+
+> example if expired
+```json
+{
+  author: '@aisbirkoenz',
+  code: 200,
+  trx_id: '0f141a97-80a0-48c7-89ea-8f4d9e277abf',
+  username: 'aisbirpedia',
+  status: 'Expired',
+  status_simbolic: '⛔ Expired',
+  amount: 1000,
+  invoice_url: 'https://saweria.co/qris/0f141a97-80a0-48c7-89ea-8f4d9e277abf',
+  total_dibayar: 1008,
+  created_at: 'Mon, 03 Feb 2025 16:37:02 GMT',
+  expired_in: '2025-02-03T16:38:02.602Z'
+}
+```
+
+## Cek balance
+```js
+const { SumshiiySawer } = require('saweria-createqr');
+const sawer = new SumshiiySawer({ username: 'your saweria username', email: 'your saweria email', password: 'your saweria password'});
+
+(async () => {
+await sawer.login() // Login to your saweria account first
+
+const saldoku = await sawer.getSaldo()
+console.log(saldoku)
+})
+```
+
+> response status
+```json
+{ 
+    author: '@aisbirkoenz',
+ balance: 99999999999999
+  }
+```
+ # Information🚨
+- Use for fraud and phishing purposes, we will not be responsible, we only make modules so that people can make further integrations on saweria.co
+- All Copyright Regarded by sumshiiy developer team
+Any security purpose? mail us [abuse@aisbir.cloud](mailto:abuse@aisbir.cloud)
+
+# Author
+[Sumshiiy developer team](https://t.me/aisbirkoenz)

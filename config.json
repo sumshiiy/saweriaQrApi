@@ -1,0 +1,10 @@
+{
+  "author": "Sumshiiy",
+  "message": "Created by Sumshiiy developer team",
+  "logdebugPrefix": "SUMSHIIY_DEBUG",
+  "logerrPrefix": "SUMSHIIY_ERR",
+  "file": "config.json",
+  "backendUri": "https://backend.saweria.co",
+  "frontEnd": "https://saweria.co",
+  "aiUri": "https://lamas.aisbir.cloud/?normal=true&prompt="
+}

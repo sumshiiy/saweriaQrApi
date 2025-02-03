@@ -1,11 +1,20 @@
 {
   "name": "saweria-createqr",
-  "version": "1.0.8",
+  "version": "1.1.2",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": ["saweria", "qris", "qrcode", "qr", "sumshiiy"],
+  "keywords": [
+    "saweria",
+    "qris",
+    "qrcode",
+    "qr",
+    "sumshiiy",
+    "sumshiiyDeveloper",
+    "aisbir",
+    "aisbirpedia"
+  ],
   "author": "@sumshiiy",
   "license": "ISC",
   "description": "An Library that allow you create some qris on saweria",
