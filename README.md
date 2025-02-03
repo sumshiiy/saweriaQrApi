@@ -1,6 +1,6 @@
 ![Sawer](https://cdn.aisbir.cloud/saweriaa.png)
 # Saweria Qr Payment api
-and saweria.co unofficial api that can create qris on own account and check status of payment
+an saweria.co unofficial api that can create qris on own account and check status of payment
 created by sumshiiy developer team
 
 > [Original Npmjs](https://www.npmjs.com/package/saweria-createqr)
