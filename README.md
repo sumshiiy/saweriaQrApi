@@ -1,9 +1,8 @@
 ![Sawer](https://cdn.aisbir.cloud/saweriaa.png)
 # Saweria Qr Payment api
-an saweria.co unofficial api that can create qris on own account and check status of payment
-created by sumshiiy developer team
+and saweria.co unofficial api that can create qris and check it automatically
 
-> [Original Npmjs](https://www.npmjs.com/package/saweria-createqr)
+> [Original Npmjs](https://www.npmjs.com/package/saweria-createqr) | [Repository](https://github.com/sumshiiy/saweriaQrApi)
 
 ## Featured
 | todos | status |
@@ -13,11 +12,17 @@ created by sumshiiy developer team
 | Set Expiry duration of payment | ✅ |
 | Catbox.moe as storage | ✅ |
 | Ai message auto generated | ✅ |
+| Auto check payment without logged in | ✅ |
+| set webhook from api | ✅ |
 | esm support | ⛔ |
 
-## Api Tutorial
-
+## Algorithm
+How auto check payments works :)
+we doesnt steal your account
+![Sawer](https://cdn.aisbir.cloud/op.png)
+## Payment api
  ### **Creating Payment basic**
+ This simple method to create payment using saweria
  ```js
 const { SumshiiySawer } = require('saweria-createqr');
 const sawer = new SumshiiySawer({ username: 'your saweria username', email: 'your saweria email', password: 'your saweria password'});
@@ -53,15 +58,15 @@ console.log(payment)
 }
 ```
 
-### Cek Payment Status
+### Cek Payment Status V1
+You must logged in to use payment status v1
  ```js
 const { SumshiiySawer } = require('saweria-createqr');
 const sawer = new SumshiiySawer({ username: 'your saweria username', email: 'your saweria email', password: 'your saweria password'});
 
 (async () => {
-await sawer.login() // Login to your saweria account first
 
- await sawer.cekpayment(trxid) // trx id received after createpayment
+ await sawer.cekPaymentV1(trxid) // trx id received after createpayment
 
 //example
 const payment = await sawer.createPaymentQr(1000,30) // expired in 30 minute
@@ -128,14 +133,108 @@ const tes = setInterval(async() => {
 }
 ```
 
-## Cek balance
+
+
+### Cek Payment Status V2
+You Doesn't need logged in
+ ```js
+const { SumshiiySawer } = require('saweria-createqr');
+const sawer = new SumshiiySawer({ username: 'your saweria username', email: 'your saweria email', password: 'your saweria password'});
+
+(async () => {
+
+ await sawer.cekPaymentV2(trxid) // trx id received after createpayment
+
+//example
+const payment = await sawer.cekPaymentV2(1000,30) // expired in 30 minute
+
+const tes = setInterval(async() => {
+   
+ const paymentStatus = await sawer.cekPaymentV2(p.trx_id)
+ console.log(paymentStatus)
+
+ if (paymentStatus.status === "Paid") {
+    console.log('Payment Berhasil, Menghentikan interval')
+     clearInterval(tes)
+ }
+}, 7000);
+})
+```
+> example if pending
+```json
+{
+  author: '@aisbirkoenz',
+  code: 200,
+  trx_id: '0f141a97-80a0-48c7-89ea-8f4d9e277abf',
+  username: 'aisbirpedia',
+  status: 'Pending',
+  status_simbolic: '⏳ Pending',
+  amount: 1000,
+  invoice_url: 'https://saweria.co/qris/0f141a97-80a0-48c7-89ea-8f4d9e277abf',
+  total_dibayar: 1008,
+  created_at: 'Mon, 03 Feb 2025 16:37:02 GMT',
+  expired_in: '2025-02-03T16:38:02.602Z'
+}
+```
+>  example if paid
+```json
+{
+  author: '@aisbirkoenz',
+  code: 200,
+  trx_id: '0f141a97-80a0-48c7-89ea-8f4d9e277abf',
+  username: 'aisbirpedia',
+  status: 'Paid',
+  status_simbolic: '✅ Paid',
+  amount: 1000,
+  invoice_url: 'https://saweria.co/qris/0f141a97-80a0-48c7-89ea-8f4d9e277abf',
+  total_dibayar: 1008,
+  created_at: 'Mon, 03 Feb 2025 16:37:02 GMT',
+  expired_in: '2025-02-03T16:38:02.602Z'
+}
+```
+
+> example if expired
+```json
+{
+  author: '@aisbirkoenz',
+  code: 200,
+  trx_id: '0f141a97-80a0-48c7-89ea-8f4d9e277abf',
+  username: 'aisbirpedia',
+  status: 'Expired',
+  status_simbolic: '⛔ Expired',
+  amount: 1000,
+  invoice_url: 'https://saweria.co/qris/0f141a97-80a0-48c7-89ea-8f4d9e277abf',
+  total_dibayar: 1008,
+  created_at: 'Mon, 03 Feb 2025 16:37:02 GMT',
+  expired_in: '2025-02-03T16:38:02.602Z'
+}
+```
+## Misc
+### Set Webhook url
 ```js
 const { SumshiiySawer } = require('saweria-createqr');
 const sawer = new SumshiiySawer({ username: 'your saweria username', email: 'your saweria email', password: 'your saweria password'});
 
 (async () => {
-await sawer.login() // Login to your saweria account first
+const webhook = await sawer.setWebhook()
+console.log(webhook)
+})
+```
+> Example result
+```json
+{ 
+  status: true,
+ message: 'Webhook Berhasil Di Set',
+  type: 'WEBHOOK'
+   }
+```
+### Cek balance
+you must be logged in to cek balance
+```js
+const { SumshiiySawer } = require('saweria-createqr');
+const sawer = new SumshiiySawer({ username: 'your saweria username', email: 'your saweria email', password: 'your saweria password'});
 
+(async () => {
 const saldoku = await sawer.getSaldo()
 console.log(saldoku)
 })
@@ -147,6 +246,24 @@ console.log(saldoku)
     author: '@aisbirkoenz',
  balance: 99999999999999
   }
+```
+
+
+### Set Fee
+you must be logged in to settings fee
+```js
+const { SumshiiySawer } = require('saweria-createqr');
+const sawer = new SumshiiySawer({ username: 'your saweria username', email: 'your saweria email', password: 'your saweria password'});
+
+(async () => {
+const saldoku = await sawer.setFee('buyer / seller')
+console.log(saldoku)
+})
+```
+
+> response status
+```json
+{ status: true, message: 'Fee Berhasil Di Set ke STREAMER' }
 ```
  # Information🚨
 - Use for fraud and phishing purposes, we will not be responsible, we only make modules so that people can make further integrations on saweria.co
